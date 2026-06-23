@@ -1,0 +1,24 @@
+{
+  // Prefer PostCSS for CSS files so Tailwind directives are recognized
+  "files.associations": {
+    "*.css": "postcss"
+  },
+
+  // Disable built-in validators that flag Tailwind directives as unknown
+  "css.validate": false,
+  "less.validate": false,
+  "scss.validate": false,
+
+  // Tailwind IntelliSense settings (install the extension for best experience)
+  "tailwindCSS.includeLanguages": {
+    "javascript": "javascript",
+    "javascriptreact": "html",
+    "typescript": "typescript",
+    "typescriptreact": "html",
+    "html": "html"
+  },
+  "tailwindCSS.emmetCompletions": true,
+
+  // Helpful editor setting for class name suggestions inside strings
+  "editor.quickSuggestions": { "strings": true }
+}

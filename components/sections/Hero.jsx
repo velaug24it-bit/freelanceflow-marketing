@@ -1,5 +1,6 @@
 // components/sections/Hero.jsx
 import { ArrowRight, Play, Star, Users, CheckCircle } from 'lucide-react'
+import Button from '../ui/Button'
 
 export default function Hero() {
   return (
@@ -14,32 +15,26 @@ export default function Hero() {
             </div>
 
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-              The All-in-One{' '}
+              Freelance management made simple.
+              <br />
               <span className="bg-gradient-to-r from-blue-600 to-purple-600 text-transparent bg-clip-text">
-                Freelance
-              </span>{' '}
-              Management Platform
+                Run clients, projects & invoices
+              </span>
+              {' '}from one place.
             </h1>
 
             <p className="text-xl text-gray-600 mb-8 max-w-lg">
-              From clients and projects to invoices and payments—everything you need to run your freelance business efficiently.
+              Save time with automation, get paid faster, and keep clients happy — the tools freelancers need to grow.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <a
-                href="https://freelanceflow-frontend-uh18.onrender.com/register"
-                className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3.5 rounded-lg font-semibold hover:shadow-lg transition text-lg"
-              >
-                Start Free Trial
-                <ArrowRight className="w-5 h-5" />
-              </a>
-              <a
-                href="/features"
-                className="inline-flex items-center justify-center gap-2 border-2 border-gray-300 text-gray-700 px-8 py-3.5 rounded-lg font-semibold hover:bg-gray-50 transition text-lg"
-              >
+              <Button href="/register" className="inline-flex items-center text-lg px-8 py-3.5" variant="primary">
+                <>Get Started — Free Trial <ArrowRight className="w-5 h-5" /></>
+              </Button>
+              <Button href="/features" className="inline-flex items-center text-lg px-8 py-3.5" variant="secondary">
                 <Play className="w-5 h-5" />
-                See How It Works
-              </a>
+                <span>How it works</span>
+              </Button>
             </div>
 
             <div className="flex items-center gap-6 mt-8 text-sm text-gray-600">

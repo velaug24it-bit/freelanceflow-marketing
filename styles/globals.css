@@ -4,7 +4,8 @@
 
 @layer base {
   body {
-    @apply text-gray-900 antialiased;
+    @apply text-gray-900 antialiased bg-white;
+    color-scheme: light;
   }
 }
 
@@ -12,5 +13,44 @@
   .container {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
+}
+
+:root {
+  --ff-primary: 59 130 246; /* rgb values for Tailwind blue-500 */
+  --ff-gradient-start: #2563EB;
+  --ff-gradient-end: #7C3AED;
+  --ff-radius: 12px;
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 font-semibold rounded-lg transition-shadow transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
+    border-radius: var(--ff-radius);
+  }
+
+  .btn-primary {
+    @apply px-6 py-2.5 text-white;
+    background: linear-gradient(90deg,var(--ff-gradient-start),var(--ff-gradient-end));
+    box-shadow: 0 6px 18px rgba(99,102,241,0.12);
+  }
+
+  .btn-secondary {
+    @apply px-5 py-2 border border-gray-200 text-gray-700 bg-white;
+  }
+
+  .btn-ghost {
+    @apply px-4 py-2 text-gray-700 bg-transparent;
+  }
+
+  /* Improve focus rings for keyboard users */
+  .btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(var(--ff-primary),0.12);
+  }
+}
+
+/* Subtle utility for cards */
+.card {
+  @apply bg-white rounded-2xl shadow-md p-6;
 }
 /* freelanceflow-marketing/app/styles/globals.css */

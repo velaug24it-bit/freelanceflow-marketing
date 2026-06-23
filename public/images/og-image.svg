@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1">
+      <stop offset="0%" stop-color="#2563EB"/>
+      <stop offset="100%" stop-color="#7C3AED"/>
+    </linearGradient>
+    <style>
+      .bg { fill: #0f172a; }
+      .title { font-family: Inter, Arial, sans-serif; font-size:72px; font-weight:700; fill: url(#g); }
+      .sub { font-family: Inter, Arial, sans-serif; font-size:28px; fill:#94A3B8; }
+    </style>
+  </defs>
+  <rect width="1200" height="630" fill="#071029"/>
+  <g transform="translate(80,180)">
+    <text class="title">FreelanceFlow</text>
+    <text class="sub" y="80">All-in-one freelance management for clients, invoices & projects</text>
+  </g>
+</svg>

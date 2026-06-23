@@ -22,10 +22,10 @@ export const metadata = {
     url: 'https://freelanceflow-marketing.vercel.app',
     siteName: 'FreelanceFlow',
     title: 'FreelanceFlow - All-in-One Freelance Management Platform',
-    description: 'Manage clients, projects, invoices, and payments all in one place.',
+    description: 'Tools to manage clients, projects, invoices, and payments—so you can focus on your craft.',
     images: [
       {
-        url: '/og-image.jpg',
+        url: '/images/og-image.svg',
         width: 1200,
         height: 630,
         alt: 'FreelanceFlow Platform',
@@ -35,8 +35,8 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'FreelanceFlow - All-in-One Freelance Management Platform',
-    description: 'Manage clients, projects, invoices, and payments all in one place.',
-    images: ['/og-image.jpg'],
+    description: 'Tools to manage clients, projects, invoices, and payments—so you can focus on your craft.',
+    images: ['/images/og-image.svg'],
   },
   alternates: {
     canonical: 'https://freelanceflow-marketing.vercel.app',
