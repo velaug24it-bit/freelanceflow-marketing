@@ -8,8 +8,9 @@ import Stats from '../components/sections/Stats'
 import Testimonials from '../components/sections/Testimonials'
 import Pricing from '../components/sections/Pricing'
 import FAQ from '../components/sections/FAQ'
-import About from '../components/sections/About'  // Import About
+import About from '../components/sections/About'
 import Blog from '../components/sections/Blog'
+import Contact from '../components/sections/Contact'  // Import Contact
 import CTA from '../components/sections/CTA'
 
 export default function Home() {
@@ -24,8 +25,9 @@ export default function Home() {
         <Testimonials />
         <Pricing />
         <FAQ />
-        <About />          {/* Add About section */}
+        <About />
         <Blog />
+        <Contact />      {/* Add Contact section */}
         <CTA />
       </main>
       <Footer />
