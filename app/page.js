@@ -12,11 +12,13 @@ import About from '../components/sections/About'
 import Blog from '../components/sections/Blog'
 import Contact from '../components/sections/Contact'  // Import Contact
 import CTA from '../components/sections/CTA'
+import HashScroller from '../components/HashScroller'
 
 export default function Home() {
   return (
     <>
       <Header />
+      <HashScroller />
       <main>
         <Hero />
         <Partners />

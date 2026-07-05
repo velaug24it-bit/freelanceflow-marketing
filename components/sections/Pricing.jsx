@@ -1,48 +1,62 @@
 // components/sections/Pricing.jsx
 'use client'
 
-import { useState } from 'react'
-import { Check, X } from 'lucide-react'
+import { useState, useEffect, useRef } from 'react'
+import { Check, X, Rocket, Zap, Building2, Sparkles } from 'lucide-react'
+
+const APP_URL = 'https://freelanceflow-frontend-uh18.onrender.com'
 
 const plans = [
   {
     name: 'Free',
-    price: 0,
+    monthlyPrice: 0,
     description: 'Perfect for getting started',
+    icon: Zap,
+    gradient: 'from-gray-600 to-slate-700',
     features: [
       { name: '5 Clients', included: true },
       { name: '10 Projects', included: true },
-      { name: '20 Invoices', included: true },
+      { name: '20 Invoices/month', included: true },
       { name: 'Basic Support', included: true },
       { name: '20 Connects/month', included: true },
       { name: 'Advanced Analytics', included: false },
       { name: 'Priority Support', included: false },
       { name: 'API Access', included: false },
+      { name: 'Custom Branding', included: false },
     ],
-    cta: 'Get Started Free',
+    cta: 'Start for Free',
+    ctaHref: `${APP_URL}/register?plan=free`,
     popular: false,
+    badge: null,
   },
   {
     name: 'Pro',
-    price: 19,
+    monthlyPrice: 19,
     description: 'Best for growing freelancers',
+    icon: Rocket,
+    gradient: 'from-indigo-500 via-purple-500 to-pink-500',
     features: [
       { name: '50 Clients', included: true },
       { name: '100 Projects', included: true },
-      { name: '500 Invoices', included: true },
+      { name: '500 Invoices/month', included: true },
       { name: 'Priority Support', included: true },
       { name: '200 Connects/month', included: true },
       { name: 'Advanced Analytics', included: true },
       { name: 'Time Tracking', included: true },
       { name: 'API Access', included: false },
+      { name: 'Custom Branding', included: false },
     ],
-    cta: 'Start Pro Trial',
+    cta: 'Try Pro — Free 14 Days',
+    ctaHref: `${APP_URL}/register?plan=pro`,
     popular: true,
+    badge: '🔥 Most Popular',
   },
   {
     name: 'Business',
-    price: 49,
-    description: 'For agencies and teams',
+    monthlyPrice: 49,
+    description: 'For agencies and power users',
+    icon: Building2,
+    gradient: 'from-amber-500 to-orange-600',
     features: [
       { name: 'Unlimited Clients', included: true },
       { name: 'Unlimited Projects', included: true },
@@ -52,49 +66,74 @@ const plans = [
       { name: 'Advanced Analytics', included: true },
       { name: 'API Access', included: true },
       { name: 'Custom Branding', included: true },
+      { name: 'Dedicated Account Manager', included: true },
     ],
-    cta: 'Start Business Trial',
+    cta: 'Try Business — Free 14 Days',
+    ctaHref: `${APP_URL}/register?plan=business`,
     popular: false,
+    badge: '🏢 For Teams',
   },
 ]
 
 export default function Pricing() {
   const [isAnnual, setIsAnnual] = useState(false)
+  const sectionRef = useRef(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add('visible')
+        })
+      },
+      { threshold: 0.05 }
+    )
+    const elements = sectionRef.current?.querySelectorAll('.section-fade')
+    elements?.forEach((el) => observer.observe(el))
+    return () => observer.disconnect()
+  }, [])
 
   return (
-    <section className="py-20 bg-gray-50" id="pricing">
+    <section className="py-24 bg-white relative overflow-hidden" id="pricing" ref={sectionRef}>
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-200 to-transparent" />
+      <div className="absolute top-40 left-0 w-64 h-64 rounded-full bg-indigo-50 blur-3xl pointer-events-none" />
+      <div className="absolute bottom-40 right-0 w-64 h-64 rounded-full bg-purple-50 blur-3xl pointer-events-none" />
+
       <div className="container mx-auto px-4">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Simple, Transparent{' '}
-            <span className="bg-gradient-to-r from-blue-600 to-purple-600 text-transparent bg-clip-text">
-              Pricing
-            </span>
+        <div className="text-center max-w-3xl mx-auto mb-16 section-fade">
+          <div className="inline-flex items-center gap-2 bg-purple-50 border border-purple-100 text-purple-700 px-4 py-1.5 rounded-full text-sm font-semibold mb-5">
+            <Sparkles className="w-4 h-4" />
+            Simple Pricing
+          </div>
+          <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-5 leading-tight">
+            Start free.{' '}
+            <span className="gradient-text">Scale as you grow.</span>
           </h2>
-          <p className="text-xl text-gray-600">
-            Choose the plan that fits your freelance business needs
+          <p className="text-xl text-gray-500 font-medium">
+            No hidden fees. Cancel anytime. 14-day free trial on paid plans.
           </p>
         </div>
 
-        {/* Toggle */}
-        <div className="flex justify-center items-center gap-4 mb-12">
-          <span className={`text-sm font-medium ${!isAnnual ? 'text-gray-900' : 'text-gray-500'}`}>
+        {/* Billing Toggle */}
+        <div className="flex justify-center items-center gap-4 mb-14 section-fade">
+          <span className={`text-sm font-bold transition-colors ${!isAnnual ? 'text-gray-900' : 'text-gray-400'}`}>
             Monthly
           </span>
           <button
+            id="pricing-toggle"
             onClick={() => setIsAnnual(!isAnnual)}
-            className="relative w-14 h-8 bg-gray-300 rounded-full transition-colors duration-300 focus:outline-none"
-            style={{ backgroundColor: isAnnual ? '#2563eb' : '#d1d5db' }}
+            className="relative w-14 h-7 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            style={{ background: isAnnual ? 'linear-gradient(135deg, #6366f1, #8b5cf6)' : '#d1d5db' }}
           >
             <span
-              className={`absolute top-1 left-1 w-6 h-6 bg-white rounded-full transition-transform duration-300 ${
-                isAnnual ? 'translate-x-6' : ''
+              className={`absolute top-0.5 left-0.5 w-6 h-6 bg-white rounded-full shadow-md transition-transform duration-300 ${
+                isAnnual ? 'translate-x-7' : ''
               }`}
             />
           </button>
-          <span className={`text-sm font-medium ${isAnnual ? 'text-gray-900' : 'text-gray-500'}`}>
+          <span className={`text-sm font-bold transition-colors flex items-center gap-2 ${isAnnual ? 'text-gray-900' : 'text-gray-400'}`}>
             Annual
-            <span className="ml-2 text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full">
+            <span className="bg-green-100 text-green-700 text-xs px-2.5 py-0.5 rounded-full font-bold border border-green-200">
               Save 20%
             </span>
           </span>
@@ -102,70 +141,108 @@ export default function Pricing() {
 
         <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {plans.map((plan, index) => {
-            const annualPrice = Math.round(plan.price * 0.8 * 12)
-            const monthlyEquivalent = Math.round(annualPrice / 12)
-            const displayPrice = isAnnual ? annualPrice : plan.price
+            const Icon = plan.icon
+            const annualTotal = Math.round(plan.monthlyPrice * 0.8 * 12)
+            const monthlyEquiv = Math.round(annualTotal / 12)
+            const displayPrice = isAnnual ? monthlyEquiv : plan.monthlyPrice
 
             return (
               <div
                 key={index}
-                className={`bg-white rounded-2xl shadow-lg overflow-hidden ${
-                  plan.popular ? 'ring-2 ring-blue-600 relative' : 'border border-gray-200'
+                className={`pricing-card relative rounded-3xl overflow-hidden section-fade ${
+                  plan.popular
+                    ? 'ring-2 ring-indigo-500 shadow-2xl shadow-indigo-200/60 scale-[1.02]'
+                    : 'border border-gray-200 shadow-md'
                 }`}
+                style={{ transitionDelay: `${index * 0.1}s` }}
               >
+                {/* Popular gradient top bar */}
                 {plan.popular && (
-                  <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white text-center py-1.5 text-sm font-semibold">
-                    MOST POPULAR
-                  </div>
+                  <div className="h-1.5 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500" />
                 )}
-                <div className="p-8">
-                  <h3 className="text-2xl font-bold">{plan.name}</h3>
-                  <div className="mt-4 flex items-baseline">
-                    <span className="text-4xl font-bold">${displayPrice}</span>
-                    <span className="text-gray-600 ml-2 text-sm">
-                      {isAnnual ? '/year' : '/month'}
-                    </span>
-                  </div>
-                  {isAnnual && (
-                    <p className="text-sm text-green-600 mt-1">
-                      ${monthlyEquivalent}/month billed annually
-                    </p>
-                  )}
-                  <p className="text-gray-600 mt-2 text-sm">{plan.description}</p>
 
-                  <ul className="mt-6 space-y-3">
+                <div className="p-8 bg-white">
+                  {/* Plan header */}
+                  <div className="flex items-start justify-between mb-6">
+                    <div>
+                      {plan.badge && (
+                        <span className={`inline-block text-xs font-bold px-3 py-1 rounded-full mb-3 ${
+                          plan.popular
+                            ? 'bg-indigo-50 text-indigo-700 border border-indigo-100'
+                            : 'bg-amber-50 text-amber-700 border border-amber-100'
+                        }`}>
+                          {plan.badge}
+                        </span>
+                      )}
+                      <h3 className="text-2xl font-black text-gray-900">{plan.name}</h3>
+                      <p className="text-gray-500 text-sm mt-1 font-medium">{plan.description}</p>
+                    </div>
+                    <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${plan.gradient} flex items-center justify-center shadow-md flex-shrink-0`}>
+                      <Icon className="w-6 h-6 text-white" />
+                    </div>
+                  </div>
+
+                  {/* Price */}
+                  <div className="mb-2">
+                    <div className="flex items-baseline gap-1">
+                      <span className="text-5xl font-black text-gray-900">${displayPrice}</span>
+                      <span className="text-gray-400 font-medium">/month</span>
+                    </div>
+                    {isAnnual && plan.monthlyPrice > 0 && (
+                      <p className="text-green-600 text-sm font-bold mt-1">
+                        ${annualTotal}/year — save ${Math.round(plan.monthlyPrice * 12 - annualTotal)}
+                      </p>
+                    )}
+                    {!isAnnual && plan.monthlyPrice > 0 && (
+                      <p className="text-gray-400 text-xs mt-1">billed monthly</p>
+                    )}
+                  </div>
+
+                  {/* CTA */}
+                  <a
+                    href={plan.ctaHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    id={`pricing-cta-${plan.name.toLowerCase()}`}
+                    className={`mt-6 mb-8 block text-center py-3.5 px-6 rounded-2xl font-bold transition-all duration-300 ${
+                      plan.popular
+                        ? 'btn-launch'
+                        : 'bg-gray-100 text-gray-800 hover:bg-gray-200 border border-gray-200'
+                    }`}
+                  >
+                    {plan.cta}
+                  </a>
+
+                  {/* Divider */}
+                  <div className="border-t border-gray-100 mb-6" />
+
+                  {/* Features */}
+                  <ul className="space-y-3">
                     {plan.features.map((feature, idx) => (
                       <li key={idx} className="flex items-center gap-3">
                         {feature.included ? (
-                          <Check className="w-5 h-5 text-green-500 flex-shrink-0" />
+                          <div className={`w-5 h-5 rounded-full bg-gradient-to-br ${plan.popular ? 'from-indigo-500 to-purple-500' : 'from-gray-600 to-slate-700'} flex items-center justify-center flex-shrink-0`}>
+                            <Check className="w-3 h-3 text-white" />
+                          </div>
                         ) : (
-                          <X className="w-5 h-5 text-gray-300 flex-shrink-0" />
+                          <div className="w-5 h-5 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0">
+                            <X className="w-3 h-3 text-gray-300" />
+                          </div>
                         )}
-                        <span className={feature.included ? 'text-gray-700' : 'text-gray-400'}>
+                        <span className={`text-sm font-medium ${feature.included ? 'text-gray-700' : 'text-gray-300'}`}>
                           {feature.name}
                         </span>
                       </li>
                     ))}
                   </ul>
-
-                  <a
-                    href={`https://freelanceflow-frontend-uh18.onrender.com/register?plan=${plan.name.toLowerCase()}`}
-                    className={`mt-8 block text-center py-3.5 px-6 rounded-lg font-semibold transition ${
-                      plan.popular
-                        ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:shadow-lg'
-                        : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
-                    }`}
-                  >
-                    {plan.cta}
-                  </a>
                 </div>
               </div>
             )
           })}
         </div>
 
-        <p className="text-center text-gray-500 text-sm mt-8">
-          All plans include a 14-day free trial. No credit card required.
+        <p className="text-center text-gray-400 text-sm mt-10 font-medium section-fade">
+          All paid plans include a 14-day free trial. No credit card required to start.
         </p>
       </div>
     </section>
