@@ -4,7 +4,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import { Menu, X, Rocket, ExternalLink, Sparkles } from 'lucide-react'
+import { Menu, X, Rocket, ExternalLink, Sparkles, Download } from 'lucide-react'
 
 const navigation = [
   { name: 'Features', href: '#features' },
@@ -23,6 +23,44 @@ export default function Header() {
   const [bannerVisible, setBannerVisible] = useState(true)
   const pathname = usePathname()
   const router = useRouter()
+
+  const [deferredPrompt, setDeferredPrompt] = useState(null)
+  const [isInstallable, setIsInstallable] = useState(false)
+
+  useEffect(() => {
+    const handleBeforeInstallPrompt = (e) => {
+      e.preventDefault()
+      setDeferredPrompt(e)
+      setIsInstallable(true)
+    }
+
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt)
+
+    if (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) {
+      setIsInstallable(false)
+    }
+
+    return () => {
+      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt)
+    }
+  }, [])
+
+  const handleInstallClick = async (e) => {
+    e.preventDefault()
+    if (deferredPrompt) {
+      deferredPrompt.prompt()
+      const { outcome } = await deferredPrompt.userChoice
+      console.log(`User response to the install prompt: ${outcome}`)
+      setDeferredPrompt(null)
+      setIsInstallable(false)
+    } else {
+      alert(
+        "To install FreelanceFlow on your device:\n\n" +
+        "• On iOS/Safari: Tap the share button in your browser and select 'Add to Home Screen'.\n" +
+        "• On desktop Chrome/Edge: Click the install icon in the address bar."
+      )
+    }
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -136,12 +174,13 @@ export default function Header() {
 
             {/* Desktop CTA */}
             <div className="hidden md:flex items-center gap-3">
-              <a
-                href={`${APP_URL}/login`}
-                className="text-sm font-semibold text-gray-600 hover:text-indigo-600 transition-colors px-3 py-2"
+              <button
+                onClick={handleInstallClick}
+                className="text-sm font-semibold text-gray-600 hover:text-indigo-600 transition-colors px-3 py-2 flex items-center gap-1.5 cursor-pointer bg-transparent border-none"
               >
-                Log In
-              </a>
+                <Download className="w-4.5 h-4.5" />
+                Download App
+              </button>
               <a
                 href={APP_URL}
                 target="_blank"
@@ -187,13 +226,16 @@ export default function Header() {
               })}
 
               <div className="flex flex-col gap-3 pt-4 mt-2 border-t border-gray-100">
-                <a
-                  href={`${APP_URL}/login`}
-                  className="text-gray-600 text-center py-3 font-semibold hover:text-indigo-600 transition"
-                  onClick={() => setIsOpen(false)}
+                <button
+                  onClick={(e) => {
+                    setIsOpen(false)
+                    handleInstallClick(e)
+                  }}
+                  className="text-gray-600 text-center py-3 font-semibold hover:text-indigo-600 transition flex items-center justify-center gap-1.5 bg-transparent border-none cursor-pointer"
                 >
-                  Log In
-                </a>
+                  <Download className="w-4 h-4" />
+                  Download App
+                </button>
                 <a
                   href={APP_URL}
                   target="_blank"
