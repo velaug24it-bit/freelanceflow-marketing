@@ -2,7 +2,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { Check, X, Rocket, Zap, Building2, Sparkles } from 'lucide-react'
+import { Check, X, Zap, Star, Crown, Sparkles } from 'lucide-react'
 
 const APP_URL = 'https://freelanceflow-frontend-uh18.onrender.com'
 
@@ -11,67 +11,57 @@ const plans = [
     name: 'Free',
     monthlyPrice: 0,
     description: 'Perfect for getting started',
-    icon: Zap,
+    icon: Star,
     gradient: 'from-gray-600 to-slate-700',
     features: [
-      { name: '5 Clients', included: true },
-      { name: '10 Projects', included: true },
-      { name: '20 Invoices/month', included: true },
+      { name: 'Max 2 Bids & 2 Saved Projects', included: true },
+      { name: 'Max 2 Portfolio Items & 2 Boosts', included: true },
+      { name: 'Max 2 active contracts & hiring slots', included: true },
+      { name: 'Max 2 Projects Posted & 2 Active Projects', included: true },
       { name: 'Basic Support', included: true },
-      { name: '20 Connects/month', included: true },
-      { name: 'Advanced Analytics', included: false },
-      { name: 'Priority Support', included: false },
-      { name: 'API Access', included: false },
-      { name: 'Custom Branding', included: false },
     ],
-    cta: 'Start for Free',
+    cta: 'Upgrade to Free',
     ctaHref: `${APP_URL}/register?plan=free`,
     popular: false,
     badge: null,
   },
   {
     name: 'Pro',
-    monthlyPrice: 19,
+    monthlyPrice: 249,
     description: 'Best for growing freelancers',
-    icon: Rocket,
-    gradient: 'from-indigo-500 via-purple-500 to-pink-500',
+    icon: Zap,
+    gradient: 'from-amber-500 to-orange-500',
     features: [
-      { name: '50 Clients', included: true },
-      { name: '100 Projects', included: true },
-      { name: '500 Invoices/month', included: true },
+      { name: 'Max 10 Bids & 10 Saved Projects', included: true },
+      { name: 'Max 10 Portfolio Items & 10 Boosts', included: true },
+      { name: 'Max 10 active contracts & hiring slots', included: true },
+      { name: 'Max 10 Projects Posted & 10 Active Projects', included: true },
+      { name: 'Expense Tracking & Task Board', included: true },
       { name: 'Priority Support', included: true },
-      { name: '200 Connects/month', included: true },
-      { name: 'Advanced Analytics', included: true },
-      { name: 'Time Tracking', included: true },
-      { name: 'API Access', included: false },
-      { name: 'Custom Branding', included: false },
     ],
-    cta: 'Try Pro — Free 14 Days',
+    cta: 'Upgrade to Pro',
     ctaHref: `${APP_URL}/register?plan=pro`,
     popular: true,
-    badge: '🔥 Most Popular',
+    badge: 'MOST POPULAR',
   },
   {
     name: 'Business',
-    monthlyPrice: 49,
+    monthlyPrice: 499,
     description: 'For agencies and power users',
-    icon: Building2,
-    gradient: 'from-amber-500 to-orange-600',
+    icon: Crown,
+    gradient: 'from-indigo-500 to-purple-600',
     features: [
-      { name: 'Unlimited Clients', included: true },
-      { name: 'Unlimited Projects', included: true },
-      { name: 'Unlimited Invoices', included: true },
-      { name: '24/7 Priority Support', included: true },
-      { name: '500 Connects/month', included: true },
-      { name: 'Advanced Analytics', included: true },
-      { name: 'API Access', included: true },
-      { name: 'Custom Branding', included: true },
-      { name: 'Dedicated Account Manager', included: true },
+      { name: 'Unlimited Bids & Saved Projects', included: true },
+      { name: 'Unlimited Portfolio Items & Boosts', included: true },
+      { name: 'Unlimited contracts & hiring slots', included: true },
+      { name: 'Unlimited Projects Posted & Active Projects', included: true },
+      { name: 'Team member access & API access', included: true },
+      { name: '24/7 Dedicated Support', included: true },
     ],
-    cta: 'Try Business — Free 14 Days',
+    cta: 'Upgrade to Business',
     ctaHref: `${APP_URL}/register?plan=business`,
     popular: false,
-    badge: '🏢 For Teams',
+    badge: null,
   },
 ]
 
@@ -110,7 +100,7 @@ export default function Pricing() {
             <span className="gradient-text">Scale as you grow.</span>
           </h2>
           <p className="text-xl text-gray-500 font-medium">
-            No hidden fees. Cancel anytime. 14-day free trial on paid plans.
+            No hidden fees. Cancel anytime.
           </p>
         </div>
 
@@ -185,12 +175,12 @@ export default function Pricing() {
                   {/* Price */}
                   <div className="mb-2">
                     <div className="flex items-baseline gap-1">
-                      <span className="text-5xl font-black text-gray-900">${displayPrice}</span>
+                      <span className="text-5xl font-black text-gray-900">₹{displayPrice}</span>
                       <span className="text-gray-400 font-medium">/month</span>
                     </div>
                     {isAnnual && plan.monthlyPrice > 0 && (
                       <p className="text-green-600 text-sm font-bold mt-1">
-                        ${annualTotal}/year — save ${Math.round(plan.monthlyPrice * 12 - annualTotal)}
+                        ₹{annualTotal}/year — save ₹{Math.round(plan.monthlyPrice * 12 - annualTotal)}
                       </p>
                     )}
                     {!isAnnual && plan.monthlyPrice > 0 && (
@@ -241,9 +231,7 @@ export default function Pricing() {
           })}
         </div>
 
-        <p className="text-center text-gray-400 text-sm mt-10 font-medium section-fade">
-          All paid plans include a 14-day free trial. No credit card required to start.
-        </p>
+
       </div>
     </section>
   )
