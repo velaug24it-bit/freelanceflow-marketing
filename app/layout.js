@@ -5,6 +5,10 @@ import Script from 'next/script'
 
 const inter = Inter({ subsets: ['latin'] })
 
+export const viewport = {
+  themeColor: '#6366f1',
+}
+
 export const metadata = {
   title: {
     default: 'FreelanceFlow - All-in-One Freelance Management Platform',
@@ -16,6 +20,12 @@ export const metadata = {
   creator: 'FreelanceFlow',
   publisher: 'FreelanceFlow',
   robots: 'index, follow',
+  manifest: '/manifest.json',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: 'FreelanceFlow',
+  },
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -57,6 +67,22 @@ export default function RootLayout({ children }) {
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'G-XXXXXXXXXX');
+          `}
+        </Script>
+        <Script id="register-sw" strategy="afterInteractive">
+          {`
+            if ('serviceWorker' in navigator) {
+              window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js').then(
+                  function(registration) {
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                  },
+                  function(err) {
+                    console.log('ServiceWorker registration failed: ', err);
+                  }
+                );
+              });
+            }
           `}
         </Script>
       </head>

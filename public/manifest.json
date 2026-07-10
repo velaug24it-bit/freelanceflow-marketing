@@ -1,0 +1,32 @@
+{
+  "name": "FreelanceFlow",
+  "short_name": "FreelanceFlow",
+  "description": "Manage clients, projects, invoices, and payments all in one place. The ultimate platform for freelancers.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#071029",
+  "theme_color": "#6366f1",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "categories": ["business", "productivity"],
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
