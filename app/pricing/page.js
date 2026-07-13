@@ -97,7 +97,7 @@ export default function PricingPage() {
                       ))}
                     </ul>
                     <a
-                      href={`https://freelanceflow-frontend-uh18.onrender.com/register?plan=${plan.name.toLowerCase()}`}
+                      href={`https://freelancewebsite.vrinnovation.online/register?plan=${plan.name.toLowerCase()}`}
                       className={`mt-8 block text-center py-3 px-6 rounded-lg font-semibold transition ${
                         plan.popular
                           ? 'bg-blue-600 text-white hover:bg-blue-700'

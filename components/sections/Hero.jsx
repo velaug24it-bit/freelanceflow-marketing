@@ -4,7 +4,7 @@
 import { ArrowRight, Rocket, Play, Star, CheckCircle, TrendingUp, DollarSign, Users } from 'lucide-react'
 import { useEffect, useRef } from 'react'
 
-const APP_URL = 'https://freelanceflow-frontend-uh18.onrender.com'
+const APP_URL = 'https://freelancewebsite.vrinnovation.online'
 
 const floatingCards = [
   { icon: '💰', label: '+$12,400 this month', color: 'from-green-400 to-emerald-500', delay: '0s' },
@@ -156,7 +156,7 @@ export default function Hero() {
                   <div className="w-3 h-3 rounded-full bg-amber-500/80" />
                   <div className="w-3 h-3 rounded-full bg-green-500/80" />
                   <div className="flex-1 ml-2 bg-gray-800/60 rounded-lg h-7 flex items-center px-3">
-                    <span className="text-gray-400 text-xs font-mono">freelanceflow-frontend-uh18.onrender.com</span>
+                    <span className="text-gray-400 text-xs font-mono">freelancewebsite.vrinnovation.online</span>
                   </div>
                 </div>
 

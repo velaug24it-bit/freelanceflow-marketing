@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import { Twitter, Linkedin, Github, Youtube, Mail, ExternalLink, Rocket } from 'lucide-react'
 
-const APP_URL = 'https://freelanceflow-frontend-uh18.onrender.com'
+const APP_URL = 'https://freelancewebsite.vrinnovation.online'
 
 const footerLinks = {
   product: [

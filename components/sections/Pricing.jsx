@@ -4,7 +4,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { Check, X, Zap, Star, Crown, Sparkles } from 'lucide-react'
 
-const APP_URL = 'https://freelanceflow-frontend-uh18.onrender.com'
+const APP_URL = 'https://freelancewebsite.vrinnovation.online'
 
 const plans = [
   {

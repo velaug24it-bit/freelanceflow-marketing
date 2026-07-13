@@ -93,7 +93,7 @@ export default function FeaturesPage() {
               Join thousands of freelancers who are already using FreelanceFlow to grow their business
             </p>
             <a
-              href="https://freelanceflow-frontend-uh18.onrender.com/register"
+              href="https://freelancewebsite.vrinnovation.online/register"
               className="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
             >
               Start Free Trial

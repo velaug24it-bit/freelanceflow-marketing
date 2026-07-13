@@ -65,7 +65,7 @@ export default function AboutPage() {
                   Start your free trial today and see why thousands of freelancers trust FreelanceFlow
                 </p>
                 <a
-                  href="https://freelanceflow-frontend-uh18.onrender.com/register"
+                  href="https://freelancewebsite.vrinnovation.online/register"
                   className="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
                 >
                   Get Started Free

@@ -14,7 +14,7 @@ const navigation = [
   { name: 'Contact', href: '#contact' },
 ]
 
-const APP_URL = 'https://freelanceflow-frontend-uh18.onrender.com'
+const APP_URL = 'https://freelancewebsite.vrinnovation.online'
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)

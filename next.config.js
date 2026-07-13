@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['images.unsplash.com', 'freelanceflow-frontend-uh18.onrender.com'],
+    domains: ['images.unsplash.com', 'freelancewebsite.vrinnovation.online'],
   },
 }
 

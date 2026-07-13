@@ -3,7 +3,7 @@
 
 import { Rocket, ArrowRight, Star, CheckCircle, ExternalLink } from 'lucide-react'
 
-const APP_URL = 'https://freelanceflow-frontend-uh18.onrender.com'
+const APP_URL = 'https://freelancewebsite.vrinnovation.online'
 
 export default function CTA() {
   return (
